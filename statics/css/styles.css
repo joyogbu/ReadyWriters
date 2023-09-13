@@ -1,0 +1,29 @@
+.top_div {
+	border:2px solid red;
+	height:auto;
+}
+#top_div1 {
+	border:2px solid blue;
+	background-color:black;
+	color:white;
+	padding:10px;
+}
+.main_div {
+	border:2px solid black;
+}
+.quotes_div {
+	border:1px solid red;
+	height:200px;
+	background:lightyellow;
+}
+.posts_div {
+	border:2px solid grey;
+	height:200px;
+}
+ul {
+	list-style-type: none;
+}
+li {
+	display:inline-block;
+	padding:0px 15px;
+}
