@@ -1,11 +1,34 @@
 const express = require('express');
-const app = express()
-const port = 3000
-const path = require('path')
-app.use(express.static('statics'));
-app.get('/', (req, res) => {
-	res.sendFile(path.join(__dirname, '/index.html'));
+//const mysql = require('mysql');
+const app = express();
+const port = 3000;
+const path = require('path');
+const postRoutes = require('./routes/posts.js');
+/*const conn = mysql.createConnection({
+	host: "localhost",
+	user: "root",
+	password: "15AGcuVuTN",
+	database: "ready_writers_db"
 });
+conn.connect((err) => {
+	if(err) {
+		console.log(`Error connecting: ${err}`);
+	}
+	console.log("Connected");
+})*/
+app.set('view engine', 'ejs');
+app.use(express.static(path.join(__dirname, 'statics')));
+/*app.get('/', (req, res) => {
+	const sql = "SELECT * FROM posts";
+	conn.query(sql, (err, rows) => {
+		if (err) {
+			throw err;
+		}
+	res.render('index', { postData: rows });
+	});
+});*/
+app.use('/', postRoutes);
 app.listen(port, () => {
 	console.log(`server running on port ${port}`)
 });
+module.exports = app;
