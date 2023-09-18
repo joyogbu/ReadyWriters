@@ -16,10 +16,10 @@
 }
 .quotes_div {
 	border:1px solid none;
-	height:200px;
+	height:auto;
 	background:navy;
 	color:white;
-	padding:0 3%;
+	padding:5%;
 	margin-left:2%;
 }
 #inner_quote {
@@ -48,7 +48,75 @@
 .img_post {
 	width:100%;
 }
-
+.post_details {
+	border-right:2px solid lightgrey;
+}
+.post_details_box {
+	border:2px solid none;
+}
+.post_details_image {
+	border:2px solid none;
+}
+.image_post_details {
+	width:100%;
+}
+.search_box {
+	border:2px solid grey;
+	padding: 2%;
+}
+.search_box button {
+	background:navy;
+	color:white;
+	padding:3%;
+	border:none;
+}
+.author_image {
+	border:1px solid red;
+	height:30px;
+	width:30px;
+	border-radius: 30px;
+	margin-right:1%;
+}
+.last_update {
+	margin-left:3%;
+}
+.comment_div {
+	border: 1px solid lightgrey;
+	padding:2% 5%;
+}
+.comment_div input {
+	width:80%;
+	height:30px;
+	border:1px solid lightgrey;
+	margin:auto;
+}
+.same_author_posts {
+	height:auto;
+	border:3px solid green;
+}
+.same_author_box {
+	height: auto;
+	border:1px solid blue;
+}
+.same_author_bo {
+	height:auto;
+	/*width:200px;*/
+	border:2px solid red;
+}
+.other_post_images {
+	width:100%;
+	height:50%;
+}
+#about_author {
+	border:1px solid lightgrey;
+	height200px;
+	width:50%;
+	margin:auto;
+	padding:0% 5%
+}
+textarea {
+	width:80%;
+}
 ul {
 	list-style-type: none;
 }

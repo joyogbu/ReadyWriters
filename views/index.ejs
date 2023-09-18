@@ -10,15 +10,17 @@
 							</div>
 							<div class="post_div_content post_text">
 								<h3><%= data.post_title %></h3>
-								<p><%= data.author_firstname + data.author_lastname %></p>
+								<p><span class="author_image"><img src="/images/authors/<% data.author_image %>"></span><span><%= data.author_firstname + data.author_lastname %></span><span class="last_update">Last updated on <%= data.date_updated.toLocaleDateString() %></span></p><br>
 								<p><%= data.post_intro %></p>
-								<a href="#">Read More</a>
+								<a href="/pages/<%= data.post_id %>">Read More</a>
 							</div>
 							<div style="clear:both"></div>
 				 		</div><br>
 						<% }); %>
 					</div>
-					<div class="col-sm-3 quotes_div"> <h3>Quotes of the Day!</h3><div id="inner_quote"><p>The best way to become a writer is to first become a reader</p></div></div>
+					<div class="col-sm-3">
+						<%- include ('includes/section.ejs'); %>
+					</div>
 
 				</div>
 			</div>

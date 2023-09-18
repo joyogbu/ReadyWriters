@@ -17,6 +17,7 @@ conn.connect((err) => {
 	console.log("Connected");
 })*/
 app.set('view engine', 'ejs');
+//app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'statics')));
 /*app.get('/', (req, res) => {
 	const sql = "SELECT * FROM posts";
@@ -28,6 +29,8 @@ app.use(express.static(path.join(__dirname, 'statics')));
 	});
 });*/
 app.use('/', postRoutes);
+app.use('/pages', postRoutes);
+app.use('/fetch_posts', postRoutes);
 app.listen(port, () => {
 	console.log(`server running on port ${port}`)
 });
