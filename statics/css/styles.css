@@ -110,9 +110,23 @@
 #about_author {
 	border:1px solid lightgrey;
 	height200px;
-	width:50%;
+	width:60%;
 	margin:auto;
-	padding:0% 5%
+	padding:0% 5%;
+	text-align:center;
+}
+#about_author_image {
+	margin:auto;
+	width:100px;
+	height:100px;
+	border:1px solid none;
+	
+}
+.author_thumbnail {
+	width: 100%;
+	height:100%;
+	object-fit:cover;
+	border-radius:50%;
 }
 textarea {
 	width:80%;

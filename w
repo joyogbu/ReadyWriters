@@ -47,7 +47,7 @@
 			$(document).ready(function() {
 			//		$("#same_btn").click(function() {
 				$.ajax({
-					url: '/fetch_posts/'+ <%= auth_id %>,
+					url: '/fetch_posts/1',
 					data: <%= auth_id %>,
 					type: "GET",
 					success: function(response) {

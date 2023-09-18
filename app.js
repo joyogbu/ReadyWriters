@@ -31,6 +31,7 @@ app.use(express.static(path.join(__dirname, 'statics')));
 app.use('/', postRoutes);
 app.use('/pages', postRoutes);
 app.use('/fetch_posts', postRoutes);
+app.use('/about', postRoutes);
 app.listen(port, () => {
 	console.log(`server running on port ${port}`)
 });
