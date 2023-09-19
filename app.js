@@ -1,5 +1,6 @@
 const express = require('express');
 //const mysql = require('mysql');
+const bodyParser = require('body-parser');
 const app = express();
 const port = 3000;
 const path = require('path');
@@ -17,7 +18,9 @@ conn.connect((err) => {
 	console.log("Connected");
 })*/
 app.set('view engine', 'ejs');
-//app.use(bodyParser.json());
+app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'statics')));
 /*app.get('/', (req, res) => {
 	const sql = "SELECT * FROM posts";
@@ -32,6 +35,7 @@ app.use('/', postRoutes);
 app.use('/pages', postRoutes);
 app.use('/fetch_posts', postRoutes);
 app.use('/about', postRoutes);
+app.use('/submit_comment', postRoutes);
 app.listen(port, () => {
 	console.log(`server running on port ${port}`)
 });

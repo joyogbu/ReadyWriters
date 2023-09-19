@@ -6,7 +6,7 @@
 						<div class="post_details_box">
 				 			<% postdata.forEach(function(data, index) { %>
 							<h2><%= data.post_title %></h2><br>
-							<p><span class="author_image"><img src="/images/authors/<% data.author_image %>"></span><span><%= data.author_firstname + data.author_lastname %></span><span class="last_update">Last updated on <%= data.date_updated.toLocaleDateString() %></span></p><br>
+							<p><div class="author_image"><img class="author_thumbnail" src="/images/authors/<%= data.author_image %>"></div><span><%= data.author_firstname + data.author_lastname %></span><span class="last_update">Last updated on <%= data.date_updated.toLocaleDateString() %></span></p><br>
 							<div class="post_details_image">
 								<img src="/images/<%= data.post_image %>" class="image_post_details">
 							</div><br><br>
@@ -17,19 +17,24 @@
 							<br><br><div id="about_author"><h3>About the author</h3><div id="about_author_image"><img class="author_thumbnail" src="/images/authors/<%= data.author_image%> "></div><div id="about_author_info"><p><%= data.author_firstname + data.author_lastname %></p><p><%= data.author_bio %></p></div></div><br><br>
 							<% }); %>
 						</div>
-						<p>author id is <%= auth_id %></p>
 						<div class="container-fluid same_author_posts">
 						<h3>Posts By The Same Author</h3>
 						<div class="row same_author_box"></div><br>
 						</div><br><br>
+				 		<div class="comments">
+							<div class="comment_details"><div class="_comment comment_avatar"><img src="images/author/avatar_001.jpeg" class="author_thumbnail" ></div><div class="_comment comment_spans"><span class="_name">name</span><span class="_created">created</span></div></div><div class="comment_msg">comment</div>
+						</div>
 						<div class="comment_div">
 							<h3>Leave a Comment</h3>
 							<span class="no_comments">0 Comment(s)</span>
-							<form>
-								<label>Name</label><br><input type="text"></input><br><br>
-								<label>Email (Required but never shown)</label><br><input type="text"></input><br><br>
-								<label>Comment</label><br><textarea></textarea><br><br>
-								<button type="button">Send</button><br>
+							<form action="" id="comment_form">
+								<input type="text" name="postid" id="postid" value="<%= p_id %>"></input><br>
+								<label>Name</label><br><input type="text" name="comment_name" id="name"></input><br><br>
+								<label>Email (Required but never shown)</label><br><input type="text" name="comment_email" id="email"></input><br><br>
+								<label>Comment</label><br><textarea name="comment_msg" id="message"></textarea><br><br>
+								<input type="submit" text="submit" /><br>
+		       						<button type="submit" id="submit_comment_btn">Send</button><br>
+						 		
 							</form>
 						</div><br><br>
 					</div>
@@ -45,6 +50,34 @@
 		</footer>
 		<script>
 			$(document).ready(function() {
+				//$('#submit_comment_btn').on('click', function() {
+				$('#comment_form').submit(function(e) {
+					e.preventDefault();
+					//alert('yowaaaa');
+					const id = $('#postid').val();
+					const name = $('#name').val();
+					const email = $('#email').val();
+					const message = $('#message').val();
+					$.ajax({
+						url: '/submit_comment',
+						async: false,
+						dataType: 'json',
+						contentType: 'application/json',
+						method: 'POST',
+						data: {"postid":id, "comment_name": name, "comment_email": email, "comment_msg":message},
+						success: function(response) {
+							alert(response);
+						},
+						error: function(error) {
+							console.log('Error:'error);
+						}
+					});
+				});
+			});
+		</script>
+
+		<script>
+			$(document).ready(function() {
 			//		$("#same_btn").click(function() {
 				$.ajax({
 					url: '/fetch_posts/'+ <%= auth_id %>,
@@ -52,16 +85,12 @@
 					type: "GET",
 					success: function(response) {
 						response.forEach(function (item) {
-							const imgTag = $('<img>', {
-								src: '/images/' + item.post_image,
-								class: 'other_post_image'
-							});
-							const divTag = $('<div', {
-								class: 'sdame_author_bo',
-							});
 							const imgUrl = '/images/'+item.post_image;
 							const imageTag = `<img src="${imgUrl}" class="other_post_images">`
-							$('.same_author_box').append('<div class ="col-sm-6 same_author_bo">' + imageTag + '<h3>' + item.post_title + '</h3><p>' + item.post_intro + '</p><a href="#">Read More</a></div>');
+							const aUrl = "/pages/" + item.post_id + "/" + item.author_id;
+							const aTag = `<a href="${aUrl}">`;
+							const h3Tag = '<h3>'+aTag;
+							$('.same_author_box').append('<div class ="col-sm-6 same_author_bo">' + imageTag + h3Tag + item.post_title + '</a></h3><p>' + item.post_intro + '</p>' + aTag + 'Read more</div>');
 						});
 						//}
 					},

@@ -71,10 +71,10 @@
 	border:none;
 }
 .author_image {
-	border:1px solid red;
-	height:30px;
-	width:30px;
-	border-radius: 30px;
+	border:1px solid none;
+	height:40px;
+	width:40px;
+
 	margin-right:1%;
 }
 .last_update {
@@ -110,7 +110,7 @@
 #about_author {
 	border:1px solid lightgrey;
 	height200px;
-	width:60%;
+	width:55%;
 	margin:auto;
 	padding:0% 5%;
 	text-align:center;
@@ -127,6 +127,29 @@
 	height:100%;
 	object-fit:cover;
 	border-radius:50%;
+}
+.comments {
+	border:1px solid lightgrey;
+	height:500px;
+}
+.comment_avatar {
+	width:30px;
+	height:30px;
+	border:3px solid red;
+}
+.comment_details {
+	border:1px solid blue;
+}
+._comment {
+	border:2px solid green;
+	display:inline-block;
+}
+.comment_spans {
+	width:auto;
+	margin-left:3%;
+}
+._name, ._created {
+	margin-right:3%;
 }
 textarea {
 	width:80%;
