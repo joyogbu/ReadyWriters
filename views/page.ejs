@@ -22,18 +22,22 @@
 						<div class="row same_author_box"></div><br>
 						</div><br><br>
 				 		<div class="comments">
-							<div class="comment_details"><div class="_comment comment_avatar"><img src="images/author/avatar_001.jpeg" class="author_thumbnail" ></div><div class="_comment comment_spans"><span class="_name">name</span><span class="_created">created</span></div></div><div class="comment_msg">comment</div>
+							<h2>Comments</h2>
+							<div id="no_of_comments"></div>
+							<!--<div class="comment_details"><div class="_comment comment_avatar"><img src="images/author/avatar_001.jpeg" class="author_thumbnail" ></div><div class="_comment comment_spans"><span class="_name">name</span><span class="_created">created</span></div></div><div class="comment_msg">comment</div>-->
+
 						</div>
 						<div class="comment_div">
-							<h3>Leave a Comment</h3>
+							<h2>Leave a Comment</h2>
 							<span class="no_comments">0 Comment(s)</span>
-							<form action="" id="comment_form">
+							<form id="comment_form" action="">
 								<input type="text" name="postid" id="postid" value="<%= p_id %>"></input><br>
 								<label>Name</label><br><input type="text" name="comment_name" id="name"></input><br><br>
 								<label>Email (Required but never shown)</label><br><input type="text" name="comment_email" id="email"></input><br><br>
 								<label>Comment</label><br><textarea name="comment_msg" id="message"></textarea><br><br>
-								<input type="submit" text="submit" /><br>
-		       						<button type="submit" id="submit_comment_btn">Send</button><br>
+								<input type="submit" name="submit" text="submit" /><br>
+								<div id="feedback"></div>
+		       						<!--<button type="button" id="submit_comment_btn">Send</button><br>-->
 						 		
 							</form>
 						</div><br><br>
@@ -49,33 +53,39 @@
 'includes/footer.ejs'); %>
 		</footer>
 		<script>
+			$('#comment_form').on('submit', function(e) {
+				var dataString = $(this).serialize();
+				$.ajax({
+					type: "POST",
+					url: '/submit_comment',
+					data: dataString,
+					success: function(response) {
+						alert(response);
+						$('#feedback').append('<p>Comments added successfully</p>');
+					},
+				});
+				e.preventDefault();
+			});
+		</script>
+		<script>
 			$(document).ready(function() {
-				//$('#submit_comment_btn').on('click', function() {
-				$('#comment_form').submit(function(e) {
-					e.preventDefault();
-					//alert('yowaaaa');
-					const id = $('#postid').val();
-					const name = $('#name').val();
-					const email = $('#email').val();
-					const message = $('#message').val();
-					$.ajax({
-						url: '/submit_comment',
-						async: false,
-						dataType: 'json',
-						contentType: 'application/json',
-						method: 'POST',
-						data: {"postid":id, "comment_name": name, "comment_email": email, "comment_msg":message},
-						success: function(response) {
-							alert(response);
-						},
-						error: function(error) {
-							console.log('Error:'error);
-						}
-					});
+				$.ajax({
+					url: '/fetch_comments/'+<%= p_id %>,
+					type: 'GET',
+					success: function(response) {
+						$('#no_of_comments').append('<span class="comments_number">'+response.length+'</span><span>Comment(s)</span>');
+						response.forEach(function(comment) {
+							//$('.comments').append('<p>'+comment.comment_body+'</p>');
+							$('.comments').append('<div class="comment_details"><div class="_comment comment_avatar"><img src="statics/images/authors/avatar_001.jpeg" class="author_thumbnail" ></div><div class="_comment comment_spans"><span class="_name">'+comment.comment_name +'</span><span class="_created">'+comment.date_created+'</span></div><div style="clear:both"></div><div class="comment_msg">'+comment.comment_body+'</div>');
+							//$('.comment_msg').append('<p>'+comment.comment_body+'</p>');
+						});
+					},
+					error: function(error) {
+						console.log('Error', error);
+					}
 				});
 			});
 		</script>
-
 		<script>
 			$(document).ready(function() {
 			//		$("#same_btn").click(function() {

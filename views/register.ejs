@@ -1,0 +1,20 @@
+<%- include ('includes/header.ejs'); %>
+<div id="main_div">
+	<form action="/register_user" method = "POST" id="user_form">
+		<h3> Please fill out this form</h3>
+		<label>Enter your last name</label><br><input type="text" name="user_lastname" id="user_lastname>"></input><br><br>
+		<label>Enter your first name</label><br><input type="text" name="user_firstname" id="user_firstname>"></input><br><br>
+		<label>Enter your email</label><br><input type="email" name="user_email" id="user_email"></input><br><br>
+		<label>Select your category(one for now)</label><br><select id="user_category" name="user_category"><br>
+			<option>--Select--</option>
+			<option>Tech</option>
+			<option>Lifestyle</option>
+			<option>Relationship</option>
+		</select><br><br>
+		<label>Short bio about yourself</label><br><textarea id="user_bio" name="user_bio"></textarea><br><br>
+		<input type="submit" name="submit" text="Submit"></input>
+	</form>
+</div><br>
+<footer>
+	<%- include ('includes/footer.ejs'); %>
+</footer>

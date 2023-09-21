@@ -39,10 +39,7 @@ router.get('/about/:authorid', (req, res) => {
 	});
 });
 router.post('/submit_comment', (req, res) => {
-	const body = req.body;
-	console.log(body)
-	res.send(body)
-	/*const postid = req.body.postid;
+	const postid = req.body.postid;
 	const name = req.body.comment_name;
 	const email = req.body.comment_email;
 	const message = req.body.comment_msg
@@ -52,10 +49,10 @@ router.post('/submit_comment', (req, res) => {
 			throw err;
 		}
 
-		res.json({feedback: "Comments added"});
-	});*/
+		res.send("Comments added");
+	});
 });
-router.get('/comments/:postid', (req, res) => {
+router.get('/fetch_comments/:postid', (req, res) => {
 	const sql = `SELECT * FROM comments WHERE comment_post_id = ${req.params.postid}`
 	conn.query(sql, (err, data) => {
 		if (err) {
@@ -63,5 +60,22 @@ router.get('/comments/:postid', (req, res) => {
 		}
 		res.send(data);
 	});
+});
+router.get('/register', (req, res) => {
+	res.render('register')
+});
+router.post('/register_user', (req, res) => {
+	const lastname = req.body.user_lastname;
+	const firstname = req.body.user_firstname;
+	const email = req.body.user_email;
+	const field = req.body.user_category;
+	const info = req.body.user_bio;
+	const sql = `INSERT INTO authors (author_lastname, author_firstname, author_email, author_field, author_bio) VALUES("${lastname}", "${firstname}", "${email}", "${field}", "${info}")`;
+	conn.query(sql, (err, data) => {
+		if (err) {
+			throw err;
+		}
+		res.send('User added successfully');
+	})
 });
 module.exports = router;
