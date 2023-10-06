@@ -1,36 +1,28 @@
 const express = require('express');
 //const mysql = require('mysql');
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
+const sessions = require('express-session');
 const app = express();
 const port = 3000;
 const path = require('path');
 const postRoutes = require('./routes/posts.js');
-/*const conn = mysql.createConnection({
-	host: "localhost",
-	user: "root",
-	password: "15AGcuVuTN",
-	database: "ready_writers_db"
-});
-conn.connect((err) => {
-	if(err) {
-		console.log(`Error connecting: ${err}`);
-	}
-	console.log("Connected");
-})*/
+const oneDay = 1000 * 60 * 60 * 24;
 app.set('view engine', 'ejs');
 app.use(express.json());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(express.static(path.join(__dirname, 'statics')));
-/*app.get('/', (req, res) => {
-	const sql = "SELECT * FROM posts";
-	conn.query(sql, (err, rows) => {
-		if (err) {
-			throw err;
-		}
-	res.render('index', { postData: rows });
-	});
-});*/
+app.use(fileUpload());
+//session middleware
+app.use(sessions({
+	secret: '15AGcuVuTN',
+	saveUninitialized: true,
+	cookie: {maxAge: oneDay},
+	resave: false
+}));
+app.use(cookieParser());
 app.use('/', postRoutes);
 app.use('/pages', postRoutes);
 app.use('/fetch_posts', postRoutes);

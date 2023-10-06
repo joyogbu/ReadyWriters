@@ -1,0 +1,44 @@
+<%- include ('includes/header.ejs'); %>
+<div id="main_div">
+	<div id="welcome_div"><div class="dashboard_logout"><div class="dash_board author_image"><img class="author_thumbnail" src="/images/uploads/author_images/<%= userImage %>" /></div><a href="/logout" class="dash_board">Log out</a></div><h3><%= userName %> Welcome to your dashboard</h3></div>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-sm-4 menu_area">
+				<ul>
+					<li><a href="#">My Profile</a></li>
+					<li>My Posts</li><ul><li><a href="/saved_posts">Saved posts</a></li><li><a href="/published_posts">Published posts</a></li></ul>
+					<li><a href="/logout">Log out</a></li>
+				</ul>
+			</div>
+			<div class="col-sm-8 view_area">
+				<h2>Create a Post</h2>
+				<form action="/add_post" method="POST" id="post_form" enctype="multipart/form-data">
+					<input type="hidden" name="post_author_id" id="post_author_id" value="<%= userId %>"></input><br>
+					<input type="text" placeholder="Enter post title..." id="post_title" name="post_title"></input><br><br>
+					<label>Upload an image for your post (jpg/jpeg/png)</label><br><input type="file" id="post_image" name="post_image" accept=".jpg, .jpeg, .png"></input><br>
+					<!--<input type="text" id="post_intro" name="post_intro" placeholder="Enter post intro..."></input><br><br>-->
+					<select id="post_cat" name="post_cat"><option>--Select post category---</option><option>Tech</option><option>Lifestyle</option><option>Relationship</option><option>Business</option></select><br><br>
+					<textarea id="editor" name="editor"></textarea><br><br>
+					<!--<script>
+                        CKEDITOR.replace( 'editor' );
+                </script>-->
+					<input type="submit" name="submit" value="Save as Draft"></input>
+					<input type="submit" name="submit" value="Publish"></input><br><br>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script>
+                        ClassicEditor
+                                .create( document.querySelector( '#editor' ) )
+                                .then( editor => {
+                                        console.log( editor );
+                                } )
+                                .catch( error => {
+                                        console.error( error );
+                                } );
+                </script>
+<footer>
+	<%- include ('includes/footer.ejs'); %>
+</footer>

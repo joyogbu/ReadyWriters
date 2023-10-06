@@ -157,13 +157,13 @@
 .comments_number {
 	margin-right:3px;
 }
-#user_form {
+#user_form, #user_login_form{
 	width:80%;
 	padding:3%;
 	margin:auto;
 	border:1px solid lightgrey;
 }
-#user_form input {
+#user_form input, #user_login_form input {
 	width:100%;
 	height:50px;
 	border:1px solid lightgrey;
@@ -175,12 +175,22 @@
 textarea {
 	width:80%;
 }
-ul {
+.top_div_row ul {
 	list-style-type: none;
 }
-li {
+.top_div_row li {
 	display:inline-block;
 	padding:0px 15px;
+}
+.dash_board {
+	display: inline-block;
+}
+.dashboard_logout {
+	text-align:right;
+	
+}
+.main_div {
+	padding:1% 3%;
 }
 footer li {
 	display:block;

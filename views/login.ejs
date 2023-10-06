@@ -1,0 +1,15 @@
+<%- include ('includes/header.ejs'); %>
+<div id="main_div"><br>
+	<form action="/login_user" method="POST" id="user_login_form">
+		<p>Please login into your dashboard</p>
+		<label>Enter your email</label><br><input type="email" name="login_email" id="login_email"></input><br><br>
+		<label>Enter your password</label><br><input type="password" id="login_password" name="login_password"></input><br><br>
+		<input type="submit" name="submit" text="Login"></input><br>
+	</form>
+<br><br>
+</div>
+<footer>
+        <%- include ('includes/footer.ejs'); %>
+</footer>
+</body>
+</html>

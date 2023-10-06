@@ -6,12 +6,12 @@
 						<% postData.forEach(function(data, index) { %>
 						<div class="post_box">
 							<div class="post_div_content post_image">
-								<img class="img_post" src="/images/<%= data.post_image %>">
+								<img class="img_post" src="/images/uploads/post_images/<%= data.post_image %>">
 							</div>
 							<div class="post_div_content post_text">
 								<h3><%= data.post_title %></h3>
-								<p><div class="author_image"><img class="author_thumbnail" src="/images/authors/<%= data.author_image %>"></div><span><%= data.author_firstname + data.author_lastname %></span><span class="last_update">Last updated on <%= data.date_updated.toLocaleDateString() %></span></p><br>
-								<p><%= data.post_intro %></p>
+								<p><div class="author_image"><img class="author_thumbnail" src="/images/uploads/author_images/<%= data.author_image %>"></div><span><%= data.author_firstname + data.author_lastname %></span><span class="last_update">Last updated on <%= data.date_updated.toLocaleDateString() %></span></p><br>
+								<p><%- data.post_intro %></p>
 								<a href="/pages/<%= data.post_id %>/<%= data.author_id %>">Read More</a>
 							</div>
 							<div style="clear:both"></div>
