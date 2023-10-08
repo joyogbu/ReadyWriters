@@ -26,12 +26,12 @@
 							<div id="no_of_comments"></div>
 							<!--<div class="comment_details"><div class="_comment comment_avatar"><img src="images/author/avatar_001.jpeg" class="author_thumbnail" ></div><div class="_comment comment_spans"><span class="_name">name</span><span class="_created">created</span></div></div><div class="comment_msg">comment</div>-->
 
-						</div>
+						</div><br>
 						<div class="comment_div">
 							<h2>Leave a Comment</h2>
-							<span class="no_comments">0 Comment(s)</span>
+							<!--<span class="no_comments">0 Comment(s)</span>-->
 							<form id="comment_form" action="">
-								<input type="text" name="postid" id="postid" value="<%= p_id %>"></input><br>
+								<input type="hidden" name="postid" id="postid" value="<%= p_id %>"></input><br>
 								<label>Name</label><br><input type="text" name="comment_name" id="name"></input><br><br>
 								<label>Email (Required but never shown)</label><br><input type="text" name="comment_email" id="email"></input><br><br>
 								<label>Comment</label><br><textarea name="comment_msg" id="message"></textarea><br><br>
@@ -61,7 +61,7 @@
 					data: dataString,
 					success: function(response) {
 						alert(response);
-						$('#feedback').append('<p>Comments added successfully</p>');
+						$('#feedback').append('<p>' +response+'</p>');
 					},
 				});
 				e.preventDefault();

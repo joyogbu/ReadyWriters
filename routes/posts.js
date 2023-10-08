@@ -10,9 +10,18 @@ router.get('/', (req, res) => {
         conn.query(sql, (err, rows) => {
                 if (err) {
                         throw err;
-                }
+		}
         res.render('index', { postData: rows });
         });
+});
+router.get('/relationship', (req, res) => {
+	const sql = "SELECT *, author_firstname FROM posts INNER JOIN authors ON posts.author_id = authors.author_id WHERE post_category = 'relationship' AND posts.published = 1";
+	conn.query(sql, (err, rows) => {
+		if (err) {
+			throw err;
+		}
+		res.render('index', { postData: rows });
+	});
 });
 //define route to get a page clicked on in the index page based on it id and author id
 router.get('/pages/:postid/:authorid', (req, res) => {
@@ -51,14 +60,18 @@ router.post('/submit_comment', (req, res) => {
 	const name = req.body.comment_name;
 	const email = req.body.comment_email;
 	const message = req.body.comment_msg
-	const sql = `INSERT INTO comments (comment_post_id, comment_name, comment_email, comment_body) VALUES("${postid}", "${name}", "${email}", "${message}")`;
-	conn.query(sql, (err, result) => {
-		if (err){
-			throw err;
-		}
+	if (name == "" || email == "" || message == "") {
+		return res.send('All fields are required');
+	} else {
+		const sql = `INSERT INTO comments (comment_post_id, comment_name, comment_email, comment_body) VALUES("${postid}", "${name}", "${email}", "${message}")`;
+		conn.query(sql, (err, result) => {
+			if (err){
+				throw err;
+			}
 
-		res.send("Comments added");
-	});
+			res.send("Comments added");
+		});
+	}
 });
 //load available comments for a post when the page loads
 router.get('/fetch_comments/:postid', (req, res) => {
