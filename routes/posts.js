@@ -14,15 +14,15 @@ router.get('/', (req, res) => {
         res.render('index', { postData: rows });
         });
 });
-router.get('/relationship', (req, res) => {
-	const sql = "SELECT *, author_firstname FROM posts INNER JOIN authors ON posts.author_id = authors.author_id WHERE post_category = 'relationship' AND posts.published = 1";
-	conn.query(sql, (err, rows) => {
-		if (err) {
-			throw err;
-		}
-		res.render('index', { postData: rows });
-	});
-});
+//router.get('/relationship', (req, res) => {
+//	const sql = "SELECT *, author_firstname FROM posts INNER JOIN authors ON posts.author_id = authors.author_id WHERE post_category = 'relationship' AND posts.published = 1";
+//	conn.query(sql, (err, rows) => {
+//		if (err) {
+//			throw err;
+//		}
+//		res.render('index', { postData: rows });
+//	});
+//});
 //define route to get a page clicked on in the index page based on it id and author id
 router.get('/pages/:postid/:authorid', (req, res) => {
 	const sql = `SELECT *, author_firstname FROM posts INNER JOIN authors ON posts.author_id = authors.author_id WHERE post_id = ${req.params.postid}`
